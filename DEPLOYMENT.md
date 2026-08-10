@@ -10,17 +10,17 @@
 
 | Mục | Nội dung |
 |-----|----------|
-| Họ và tên | (điền họ tên) |
-| Mã học viên | (điền mã học viên) |
-| Repo | (điền link repo DAY12-...) |
+| Họ và tên | Đặng Trần Trung Dũng |
+| Mã học viên | 2A202601785 |
+| Repo | https://github.com/dungdunno16/DAY12-2A202601785-DangTranTrungDung.git |
 
 ## Service
 
 | Mục | Nội dung |
 |-----|----------|
-| Public URL | https://TODO-thay-bang-url-that.up.railway.app |
-| Platform | Railway / Render / Cloud Run — (điền platform bạn dùng) |
-| Ngày deploy | (điền ngày) |
+| Public URL | https://day12-agent-production-5c18.up.railway.app |
+| Platform | Railway |
+| Ngày deploy | 10/08/2026 |
 
 ## Biến Môi Trường Đã Set Trên Cloud
 
@@ -30,7 +30,7 @@ Ghi tên biến và **nguồn giá trị**, không ghi giá trị:
 |------|--------|---------|
 | `PORT` | ✅ | platform tự gán |
 | `AGENT_API_KEY` | ✅ | đặt trong dashboard, không nằm trong repo |
-| `REDIS_URL` | ✅ | (điền: Redis add-on của platform / Upstash / ...) |
+| `REDIS_URL` | ✅ | Redis add-on của Railway |
 | `RATE_LIMIT_PER_MINUTE` | ✅ | 10 |
 | `MONTHLY_BUDGET_USD` | ✅ | 10.0 |
 | `LOG_LEVEL` | ✅ | INFO |
@@ -73,7 +73,64 @@ done; echo
 Dán output của các lệnh trên vào đây:
 
 ```
-(điền output)
+HTTP/2 200 
+content-type: application/json
+date: Mon, 10 Aug 2026 05:46:58 GMT
+server: railway-hikari
+x-railway-request-id: YBctlx13QQe8TI-UCYBc-A
+content-length: 57
+x-hikari-trace: sin1.hs0s
+x-railway-edge: sin1
+
+{"status":"ok","service":"day12-agent","version":"1.0.0"}
+
+HTTP/2 200 
+content-type: application/json
+date: Mon, 10 Aug 2026 05:48:22 GMT
+server: railway-hikari
+x-railway-request-id: 9Tl9UqVtSKajHjWS0_TJvA
+content-length: 31
+x-hikari-trace: sin1.tr00
+x-railway-edge: sin1
+
+{"status":"ready","redis":true}
+
+HTTP/2 401 
+content-type: application/json
+date: Mon, 10 Aug 2026 05:40:39 GMT
+server: railway-hikari
+x-railway-request-id: WjfPcz68SCuNtMjz9I3ezw
+content-length: 39
+x-hikari-trace: sin1.nzn2
+x-railway-edge: sin1
+
+{"detail":"invalid or missing API key"}
+
+HTTP/2 200 
+content-type: application/json
+date: Mon, 10 Aug 2026 05:43:00 GMT
+server: railway-hikari
+x-railway-request-id: ZddVEXlqTRix-dpvWUN5dQ
+content-length: 282
+x-hikari-trace: sin1.tr00
+x-railway-edge: sin1
+vary: accept-encoding
+
+{"answer":"Ngắn gọn: Hello phụ thuộc vào ba yếu tố — cấu hình qua biến môi trường, health check để orchestrator biết trạng thái, và giới hạn tài nguyên.","user_id":"anonymous","history_length":0,"cost_usd":2.115e-05,"tokens":{"in":1,"out":35}}
+
+HTTP/2 200 
+content-type: application/json
+date: Mon, 10 Aug 2026 05:51:16 GMT
+server: railway-hikari
+x-railway-request-id: t7dhTB7CS5aEYc0TnPRhug
+content-length: 279
+x-hikari-trace: sin1.98a6
+x-railway-edge: sin1
+vary: accept-encoding
+
+{"answer":"Câu hỏi hay. Deploy là gì thường được giải quyết bằng cách chuẩn hóa môi trường chạy: cùng một image chạy giống nhau ở laptop và trên cloud.","user_id":"sv-test","history_length":0,"cost_usd":2.145e-05,"tokens":{"in":3,"out":35}}
+
+200 200 200 200 200 200 200 200 200 200 429 429 429 429 429 
 ```
 
 ## Ảnh Chụp Màn Hình
@@ -83,19 +140,4 @@ Dán output của các lệnh trên vào đây:
 - `screenshots/dashboard.png` — trang quản lý service trên platform
 - `screenshots/health.png` — kết quả gọi `/health` từ trình duyệt hoặc curl
 
----
 
-## Nếu Dùng Phương Án Dự Phòng
-
-Không đăng ký được tài khoản cloud? Vẫn nộp được bài, nhưng CP5 tối đa 60% điểm:
-
-1. Đặt `LOCAL_FALLBACK=true` trong `.env`
-2. Chạy `docker compose up -d` rồi kiểm tra `docker compose ps`
-3. Chụp màn hình vào `screenshots/`
-4. Chạy `pytest tests/test_cp5.py -v` — bộ test sẽ tự chuyển sang kiểm tra
-   `http://localhost:8000`
-5. Ghi rõ lý do không deploy được vào phần dưới đây:
-
-```
-(điền lý do nếu dùng phương án dự phòng, ngược lại xóa mục này)
-```
